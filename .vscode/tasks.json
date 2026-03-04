@@ -7,8 +7,17 @@
       "command": "bash",
       "args": [
         "-c",
-        "cd \"${workspaceFolder}\" && javac functions_arrays/${fileBasename} && java functions_arrays.${fileBasenameNoExtension} < functions_arrays/input.txt > functions_arrays/output.txt"
+        "# Compile all Java files in functions_arrays and run the chosen main class\njavac functions_arrays/*.java && java -cp \"${workspaceFolder}\" functions_arrays.anyBaseSubtraction < functions_arrays/input.txt > functions_arrays/output.txt"
       ],
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "panel": "shared"
+      },
+      "problemMatcher": "$javac",
       "group": {
         "kind": "build",
         "isDefault": true
