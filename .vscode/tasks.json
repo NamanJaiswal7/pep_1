@@ -1,0 +1,18 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Run Java DSA",
+      "type": "shell",
+      "command": "bash",
+      "args": [
+        "-c",
+        "cd \"${workspaceFolder}\" && javac functions_arrays/${fileBasename} && java functions_arrays.${fileBasenameNoExtension} < functions_arrays/input.txt > functions_arrays/output.txt"
+      ],
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      }
+    }
+  ]
+}
