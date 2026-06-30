@@ -2,12 +2,12 @@
   "version": "2.0.0",
   "tasks": [
     {
-      "label": "Run Java DSA",
+      "label": "Run Active Java",
       "type": "shell",
       "command": "bash",
       "args": [
         "-c",
-        "# Compile all Java files in functions_arrays and run the chosen main class\njavac functions_arrays/*.java && java -cp \"${workspaceFolder}\" functions_arrays.anyBaseSubtraction < functions_arrays/input.txt > functions_arrays/output.txt"
+        "javac functions_arrays/*.java && java -cp \"${workspaceFolder}\" functions_arrays.${fileBasenameNoExtension} > functions_arrays/output.txt"
       ],
       "options": {
         "cwd": "${workspaceFolder}"
@@ -21,6 +21,28 @@
       "group": {
         "kind": "build",
         "isDefault": true
+      }
+    },
+    {
+      "label": "Run Java DSA (fallback)",
+      "type": "shell",
+      "command": "bash",
+      "args": [
+        "-c",
+        "# Compile all Java files in functions_arrays. If the active file is not a Java file, run this fallback class\njavac functions_arrays/*.java && \nif [ -n \"${fileBasenameNoExtension}\" ] && [ \"${fileExt}\" = \".java\" ]; then \n  java -cp \"${workspaceFolder}\" functions_arrays.${fileBasenameNoExtension} < functions_arrays/input.txt > functions_arrays/output.txt; \nelse \n  java -cp \"${workspaceFolder}\" functions_arrays.anyBaseSubtraction < functions_arrays/input.txt > functions_arrays/output.txt; \nfi"
+      ],
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "panel": "shared"
+      },
+      "problemMatcher": "$javac",
+      "group": {
+        "kind": "none",
+        "isDefault": false
       }
     }
   ]
