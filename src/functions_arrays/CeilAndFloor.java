@@ -1,5 +1,5 @@
 package functions_arrays;
-
+import java.lang.*;
 public class CeilAndFloor {
     public static int getCeil(int[] arr, int target) {
         int left = 0;
